@@ -1,0 +1,4 @@
+# To create docker image
+docker build . -t test:latest
+# To run the image in the background with db as a volume and restart always in case it fails
+docker run --name test -d -v ./db.sqlite3 --restart always -network host test:latest

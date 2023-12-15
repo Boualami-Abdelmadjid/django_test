@@ -1,0 +1,37 @@
+{% extends 'base/root.html' %}{% load i18n %} {% load static %} {% block content %}
+<main>
+{% if object %}
+  <h1 style="text-align: center;">{% trans 'Receipts Details' %}</h1>
+  <div class="receipt_list">
+
+    <div  class="receipt_details">
+      
+        <span>{% trans 'Store name' %}</span>
+        <span>{{ object.store_name }}</span>
+      
+      
+        <span>{% trans 'Receipt date' %}</span>
+        <span>{{ object.purchase_date|date }}</span>
+      
+      
+        <span>{% trans 'Receipt items' %}</span>
+        <span>{{ object.item_list }}</span>
+      
+      
+        <span>{% trans 'Total' %}</span>
+        <span>{{ object.total }}</span>
+      
+
+
+    </div>
+  </div>
+  {% else %}
+  <p style="text-align: center; font-size: 1.5rem; margin-top: 5rem">
+    No receipts, add one from
+    <a  href="{% url 'add-receipt' %}">here</a>
+  </p>
+{% endif %} 
+</main>
+
+
+{% endblock %}

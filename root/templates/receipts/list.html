@@ -1,0 +1,21 @@
+<!-- Prettier ignore -->
+{% extends 'base/root.html' %}{% load i18n %} {% load static %} {% block content %} {% if object_list %}
+<h1 style="text-align: center;">{% trans 'Receipts' %}</h1>
+<div class="receipt_list">
+{% for receipt in object_list %}
+<div href="{% url 'receipts-details' receipt.id %}" class="receipt_container">
+<p style="text-align: center;">{{ receipt.store_name }}</p>
+<p style="text-align: center;">{{ receipt.purchase_date|date }}</p>
+<div class="receipt_container-actions">
+<a href="{% url 'receipts-details' receipt.id %}">{% trans 'Details' %}</a>
+<a href="{% url 'edit-receipt' receipt.id %}">{% trans 'Edit' %}</a>
+</div>
+</div>
+{% endfor %}
+</div>
+ {% else %}
+<p style="text-align: center; font-size: 1.5rem; margin-top: 5rem">
+  No receipts, add one from
+  <a  href="{% url 'add-receipt' %}">here</a>
+</p>
+{% endif %} {% endblock %}

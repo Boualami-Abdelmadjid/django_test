@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+
+  web:
+    container_name: test_gui
+    build: ./root
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    restart: always
+    volumes:
+      - ./root:/code
+    environment:
+      DEBUG: 1
+      SECRET_KEY: test_web
+
+    ports:
+      - 8000:8000
+    depends_on:
+      - server
+
+  server:
+    container_name: test_server
+    image: nginx:1.23.3
+    volumes:
+      - ./nginx/prod.conf:/etc/nginx/conf.d/default.conf
+      - ./root/static:/resources/web
+    restart: always
+    ports:
+      - 80:80

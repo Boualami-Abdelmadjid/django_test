@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receipts Management</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+  </head>
+  <body>
+    <header>
+      {% if user.is_authenticated %}
+      <div>
+        <form action="{% url 'logout' %}" method="POST">
+          {% csrf_token %}
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+      <div>
+        <a href="{% url 'receipts' %}">Receipts</a>
+        <a href="{% url 'add-receipt' %}">Add receipt</a>
+      </div>
+      {% else %}
+      <div>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+      </div>
+      {% endif %}
+    </header>
+    {% block content %}{% endblock %}
+  </body>
+</html>
